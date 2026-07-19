@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#f8fafc;
+  color:#111827;
+}
+
+.gradient-bg{
+  background:linear-gradient(135deg,#0f172a,#1d4ed8,#06b6d4);
+}
+
+.glass{
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.2);
+}
+
+.section-title{
+  font-size:3rem;
+  font-weight:800;
+}
+
+.shadow-card{
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+}

@@ -1,54 +1,136 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-slate-950 text-white">
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
-        <div>
-          <h2 className="text-3xl font-bold mb-4">
-            Shiv Consultancy
-          </h2>
+        <div className="grid lg:grid-cols-4 gap-10">
 
-          <p className="text-gray-400">
-            Your trusted insurance partner for Car, Bike,
-            Health, Life & Commercial Insurance.
-          </p>
-        </div>
+          <div>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-4">
-            Quick Links
-          </h3>
+            <h2 className="text-3xl font-extrabold text-blue-400">
+              Shiv Consultancy
+            </h2>
 
-          <ul className="space-y-2 text-gray-400">
-            <li><a href="/">Home</a></li>
-            <li><a href="#contact">Free Quote</a></li>
-            <li><a href="/dashboard">CRM Dashboard</a></li>
-          </ul>
-        </div>
+            <p className="mt-5 text-gray-400 leading-8">
+              Trusted Insurance Consultant providing Car, Bike,
+              Health, Life and Commercial Vehicle Insurance with
+              instant renewal and claim assistance.
+            </p>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-4">
-            Contact
-          </h3>
+          </div>
 
-          <p className="text-gray-400">
-            📞 +91 9054706736
-          </p>
+          <div>
 
-          <p className="text-gray-400">
-            📧 info@shivconsultancy.com
-          </p>
+            <h3 className="text-xl font-bold mb-5">
+              Quick Links
+            </h3>
 
-          <p className="text-gray-400">
-            Ahmedabad, Gujarat
-          </p>
+            <ul className="space-y-3 text-gray-400">
+
+              <li>
+                <a href="/" className="hover:text-white">
+                  Home
+                </a>
+              </li>
+
+              <li>
+                <a href="#about" className="hover:text-white">
+                  About Us
+                </a>
+              </li>
+
+              <li>
+                <a href="#services" className="hover:text-white">
+                  Services
+                </a>
+              </li>
+
+              <li>
+                <a href="#contact" className="hover:text-white">
+                  Contact
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div>
+
+            <h3 className="text-xl font-bold mb-5">
+              Our Services
+            </h3>
+
+            <ul className="space-y-3 text-gray-400">
+
+              <li>🚗 Car Insurance</li>
+              <li>🏍 Bike Insurance</li>
+              <li>❤️ Health Insurance</li>
+              <li>🛡 Life Insurance</li>
+              <li>🚚 Commercial Vehicle</li>
+              <li>📄 Claim Assistance</li>
+
+            </ul>
+
+          </div>
+
+          <div>
+
+            <h3 className="text-xl font-bold mb-5">
+              Contact Us
+            </h3>
+
+            <div className="space-y-4 text-gray-400">
+
+              <p>📞 +91 8511632556</p>
+
+              <p>📧 info@shivconsultancy.in</p>
+
+              <p>📍 Ahmedabad, Gujarat</p>
+
+            </div>
+
+            <div className="flex gap-4 mt-6">
+
+              <a
+                href="tel:8511632556"
+                className="bg-blue-600 px-5 py-3 rounded-xl hover:bg-blue-700"
+              >
+                Call
+              </a>
+
+              <a
+                href="https://wa.me/918511632556"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 px-5 py-3 rounded-xl hover:bg-green-700"
+              >
+                WhatsApp
+              </a>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
 
-      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500">
-        © 2026 Shiv Consultancy. All Rights Reserved.
+      <div className="border-t border-slate-800">
+
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+
+          <p className="text-gray-500 text-sm">
+            © 2026 Shiv Consultancy. All Rights Reserved.
+          </p>
+
+          <p className="text-gray-500 text-sm mt-3 md:mt-0">
+            Made with ❤️ in India
+          </p>
+
+        </div>
+
       </div>
 
     </footer>

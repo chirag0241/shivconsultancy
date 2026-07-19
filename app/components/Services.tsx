@@ -2,78 +2,95 @@ const services = [
   {
     title: "Car Insurance",
     icon: "🚗",
-    desc: "Instant renewal, comprehensive & third-party car insurance.",
+    desc: "Instant policy renewal with comprehensive and third-party coverage.",
   },
   {
     title: "Bike Insurance",
     icon: "🏍️",
-    desc: "Affordable bike insurance with quick renewal support.",
+    desc: "Affordable bike insurance with quick renewal and claim support.",
   },
   {
     title: "Health Insurance",
     icon: "❤️",
-    desc: "Individual, family floater & senior citizen health plans.",
+    desc: "Protect yourself and your family with the best health plans.",
   },
   {
     title: "Life Insurance",
     icon: "🛡️",
-    desc: "Secure your family's future with the right life insurance.",
+    desc: "Secure your family's future with reliable life insurance plans.",
   },
   {
     title: "Commercial Vehicle",
     icon: "🚚",
-    desc: "Insurance solutions for trucks, taxis & commercial vehicles.",
+    desc: "Insurance solutions for trucks, taxis and commercial vehicles.",
   },
   {
     title: "Claim Assistance",
     icon: "📄",
-    desc: "Complete claim support from document collection to settlement.",
+    desc: "Complete support from document collection to claim settlement.",
   },
 ];
 
 export default function Services() {
   return (
-    <section className="py-20 bg-gray-100">
-
+    <section
+      id="services"
+      className="py-24 bg-gradient-to-b from-blue-50 to-white"
+    >
       <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-4xl font-bold text-center text-blue-700 mb-4">
-          Our Insurance Services
-        </h2>
+        <div className="text-center mb-16">
 
-        <p className="text-center text-gray-600 mb-12">
-          Complete insurance solutions under one roof.
-        </p>
+          <span className="text-blue-700 font-semibold uppercase tracking-widest">
+            Our Services
+          </span>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <h2 className="text-5xl font-extrabold mt-4 text-gray-900">
+            Complete Insurance Solutions
+          </h2>
+
+          <p className="text-gray-600 mt-5 text-lg max-w-3xl mx-auto">
+            We provide end-to-end insurance services with expert guidance,
+            quick renewals and hassle-free claim assistance.
+          </p>
+
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {services.map((service, index) => (
+
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition"
+              className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100"
             >
-              <div className="text-5xl mb-4">
+
+              <div className="w-20 h-20 rounded-2xl bg-blue-100 flex items-center justify-center text-5xl mb-6">
                 {service.icon}
               </div>
 
-              <h3 className="text-2xl font-bold mb-3">
+              <h3 className="text-2xl font-bold mb-4">
                 {service.title}
               </h3>
 
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-8">
                 {service.desc}
               </p>
 
-              <button className="mt-6 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
-                Learn More
-              </button>
+              <a
+                href="#contact"
+                className="inline-block mt-8 bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-800 transition"
+              >
+                Get Quote →
+              </a>
+
             </div>
+
           ))}
 
         </div>
 
       </div>
-
     </section>
   );
 }

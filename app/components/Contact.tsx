@@ -146,14 +146,14 @@ export default function Contact() {
           <div className="grid grid-cols-2 gap-4 mt-8">
 
             <a
-              href="tel:9054706736"
+              href="tel:8511632556"
               className="bg-green-600 text-white text-center py-3 rounded-lg font-bold"
             >
               📞 Call Now
             </a>
 
             <a
-              href="https://wa.me/919054706736"
+              href="https://wa.me/918511632556"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 text-white text-center py-3 rounded-lg font-bold"
