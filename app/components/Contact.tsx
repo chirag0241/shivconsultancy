@@ -52,21 +52,28 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 bg-blue-700 text-white"
+      className="bg-gradient-to-br from-blue-700 via-blue-800 to-blue-950 py-20 text-white"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="mx-auto max-w-7xl px-6">
 
-        <h2 className="text-4xl font-bold text-center mb-10">
+        {/* Heading */}
+        <h2 className="mb-3 text-center text-4xl font-bold">
           Get Free Insurance Quote
         </h2>
 
-        <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 text-black shadow-xl">
+        <p className="mb-10 text-center text-blue-100">
+          One Step Solution For All Your Insurance Needs
+        </p>
+
+        {/* Quote Form */}
+        <div className="mx-auto max-w-2xl rounded-2xl bg-white p-8 text-black shadow-xl">
 
           <form
             onSubmit={handleSubmit}
             className="space-y-5"
           >
 
+            {/* Name */}
             <input
               type="text"
               placeholder="Full Name"
@@ -77,10 +84,11 @@ export default function Contact() {
                   name: e.target.value,
                 })
               }
-              className="w-full border rounded-lg p-4"
+              className="w-full rounded-lg border p-4"
               required
             />
 
+            {/* Mobile */}
             <input
               type="tel"
               placeholder="Mobile Number"
@@ -91,10 +99,11 @@ export default function Contact() {
                   mobile: e.target.value,
                 })
               }
-              className="w-full border rounded-lg p-4"
+              className="w-full rounded-lg border p-4"
               required
             />
 
+            {/* Vehicle */}
             <input
               type="text"
               placeholder="Vehicle Number (Optional)"
@@ -105,9 +114,10 @@ export default function Contact() {
                   vehicle: e.target.value,
                 })
               }
-              className="w-full border rounded-lg p-4"
+              className="w-full rounded-lg border p-4"
             />
 
+            {/* Insurance */}
             <select
               value={form.insurance}
               onChange={(e) =>
@@ -116,25 +126,35 @@ export default function Contact() {
                   insurance: e.target.value,
                 })
               }
-              className="w-full border rounded-lg p-4"
+              className="w-full rounded-lg border p-4"
               required
             >
-              <option value="">Select Insurance</option>
+              <option value="">
+                Select Insurance
+              </option>
+
               <option>Car Insurance</option>
               <option>Bike Insurance</option>
               <option>Health Insurance</option>
               <option>Life Insurance</option>
               <option>Commercial Vehicle</option>
+              <option>Travel Insurance</option>
+              <option>Personal Accident Insurance</option>
+              <option>Shop & Office Insurance</option>
             </select>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-700 text-white py-4 rounded-lg font-bold hover:bg-blue-800"
+              className="w-full rounded-lg bg-blue-700 py-4 font-bold text-white transition hover:bg-blue-800 disabled:opacity-60"
             >
-              {loading ? "Submitting..." : "Get Free Quote"}
+              {loading
+                ? "Submitting..."
+                : "Get Free Quote"}
             </button>
 
+            {/* Message */}
             {message && (
               <p className="text-center font-semibold">
                 {message}
@@ -143,11 +163,12 @@ export default function Contact() {
 
           </form>
 
-          <div className="grid grid-cols-2 gap-4 mt-8">
+          {/* Call + WhatsApp */}
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
             <a
               href="tel:8511632556"
-              className="bg-green-600 text-white text-center py-3 rounded-lg font-bold"
+              className="rounded-lg bg-green-600 py-3 text-center font-bold text-white transition hover:bg-green-700"
             >
               📞 Call Now
             </a>
@@ -156,10 +177,55 @@ export default function Contact() {
               href="https://wa.me/918511632556"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 text-white text-center py-3 rounded-lg font-bold"
+              className="rounded-lg bg-green-500 py-3 text-center font-bold text-white transition hover:bg-green-600"
             >
               💬 WhatsApp
             </a>
+
+          </div>
+
+        </div>
+
+        {/* Office Contact Details */}
+        <div className="mx-auto mt-10 max-w-3xl text-center">
+
+          <h3 className="text-2xl font-bold">
+            Shiv Consultancy
+          </h3>
+
+          <p className="mt-1 text-blue-100">
+            Your Trust, Our Responsibility
+          </p>
+
+          <div className="mt-6 space-y-3 text-blue-50">
+
+            {/* Address */}
+            <p>
+              📍 431, Devnandan Mall, Opp. Sanyas Ashram,
+              Ellisbridge, Ahmedabad
+            </p>
+
+            {/* Mobile */}
+            <p>
+              📞{" "}
+              <a
+                href="tel:8511632556"
+                className="font-semibold hover:text-cyan-300"
+              >
+                8511632556
+              </a>
+            </p>
+
+            {/* Email */}
+            <p>
+              ✉️{" "}
+              <a
+                href="mailto:info.shivconsultancyahm@gmail.com"
+                className="font-semibold hover:text-cyan-300"
+              >
+                info.shivconsultancyahm@gmail.com
+              </a>
+            </p>
 
           </div>
 

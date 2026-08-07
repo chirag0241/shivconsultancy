@@ -61,11 +61,20 @@ export default function Dashboard() {
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
 
-  const [userName, setUserName] = useState("Boss");
-  const [userEmail, setUserEmail] = useState("");
-  const [userRole, setUserRole] = useState("Boss");
-  const [profileLoading, setProfileLoading] = useState(true);
-  const [loggingOut, setLoggingOut] = useState(false);
+const [userName, setUserName] = useState("Nikita Bhavsar");
+const [userEmail, setUserEmail] = useState("");
+const [userMobile, setUserMobile] = useState("");
+const [userRole, setUserRole] = useState("Admin");
+
+const [profileLoading, setProfileLoading] = useState(true);
+const [profileSaving, setProfileSaving] = useState(false);
+const [showProfileModal, setShowProfileModal] = useState(false);
+const [loggingOut, setLoggingOut] = useState(false);
+
+const [profileForm, setProfileForm] = useState({
+  full_name: "",
+  mobile: "",
+});
 
   const [selectedLead, setSelectedLead] =
     useState<Lead | null>(null);
@@ -110,56 +119,154 @@ export default function Dashboard() {
     }
   }, []);
 
-  const loadUserProfile = useCallback(async () => {
-    try {
-      setProfileLoading(true);
+const loadUserProfile = useCallback(async () => {
+  try {
+    setProfileLoading(true);
 
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
 
-      if (userError || !user) {
-        window.location.replace("/login");
-        return;
-      }
-
-      setUserEmail(user.email || "");
-
-      const { data: profile, error: profileError } =
-        await supabase
-          .from("profiles")
-          .select("full_name, role")
-          .eq("id", user.id)
-          .maybeSingle();
-
-      if (profileError) {
-        console.error(
-          "Profile load error:",
-          profileError.message
-        );
-      }
-
-      const fallbackName =
-        user.user_metadata?.full_name ||
-        user.email?.split("@")[0] ||
-        "Boss";
-
-      setUserName(profile?.full_name || fallbackName);
-      setUserRole(profile?.role || "Boss");
-    } catch (error) {
-      console.error("User profile error:", error);
-      setUserName("Boss");
-      setUserRole("Boss");
-    } finally {
-      setProfileLoading(false);
+    if (userError || !user) {
+      window.location.replace("/login");
+      return;
     }
-  }, []);
 
-  useEffect(() => {
-    loadLeads();
-    loadUserProfile();
-  }, [loadLeads, loadUserProfile]);
+    const email = user.email || "";
+    setUserEmail(email);
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("full_name, mobile, role")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (profileError) {
+      console.error("Profile load error:", profileError.message);
+    }
+
+    const isOwner = email === "admin@shivconsultancy.com";
+
+    const defaultName = isOwner
+      ? "Nikita Bhavsar"
+      : user.user_metadata?.full_name ||
+        email.split("@")[0] ||
+        "Employee";
+
+    const defaultRole = isOwner ? "Admin" : "Employee";
+
+    const finalName = profile?.full_name || defaultName;
+    const finalMobile = profile?.mobile || "";
+    const finalRole = isOwner
+      ? "Admin"
+      : profile?.role || defaultRole;
+
+    setUserName(finalName);
+    setUserMobile(finalMobile);
+    setUserRole(finalRole);
+
+    setProfileForm({
+      full_name: finalName,
+      mobile: finalMobile,
+    });
+  } catch (error) {
+    console.error("User profile error:", error);
+
+    setUserName("Nikita Bhavsar");
+    setUserRole("Admin");
+  } finally {
+    setProfileLoading(false);
+  }
+}, []);
+
+const openProfileModal = () => {
+  setProfileForm({
+    full_name: userName,
+    mobile: userMobile,
+  });
+
+  setMessage("");
+  setShowProfileModal(true);
+};
+
+const saveProfile = async (
+  event: FormEvent<HTMLFormElement>
+) => {
+  event.preventDefault();
+
+  const cleanName = profileForm.full_name.trim();
+  const cleanMobile = profileForm.mobile.trim();
+
+  if (!cleanName) {
+    setMessage("Please enter your full name.");
+    return;
+  }
+
+  if (cleanMobile && cleanMobile.length !== 10) {
+    setMessage("Please enter a valid 10-digit mobile number.");
+    return;
+  }
+
+  try {
+    setProfileSaving(true);
+    setMessage("");
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      window.location.replace("/login");
+      return;
+    }
+
+    const role =
+      user.email === "admin@shivconsultancy.com"
+        ? "Admin"
+        : "Employee";
+
+    const { error } = await supabase.from("profiles").upsert(
+      {
+        id: user.id,
+        full_name: cleanName,
+        mobile: cleanMobile,
+        role,
+        updated_at: new Date().toISOString(),
+      },
+      {
+        onConflict: "id",
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    setUserName(cleanName);
+    setUserMobile(cleanMobile);
+    setUserRole(role);
+
+    setShowProfileModal(false);
+    setMessage("Profile updated successfully.");
+  } catch (error) {
+    console.error("Profile update error:", error);
+
+    setMessage(
+      error instanceof Error
+        ? error.message
+        : "Profile update failed. Please try again."
+    );
+  } finally {
+    setProfileSaving(false);
+  }
+};
+
+useEffect(() => {
+  loadLeads();
+  loadUserProfile();
+}, [loadLeads, loadUserProfile]);
 
   const logout = async () => {
     try {
@@ -480,21 +587,31 @@ setEditForm({
                 {profileLoading ? "..." : profileInitial}
               </div>
 
-              <div className="min-w-0">
-                <p className="max-w-52 truncate font-bold text-slate-900">
-                  {profileLoading
-                    ? "Loading profile..."
-                    : userName}
-                </p>
+<div className="min-w-0">
+  <div className="flex items-center gap-2">
+    <p className="max-w-52 truncate font-bold text-slate-900">
+      {profileLoading
+        ? "Loading profile..."
+        : userName}
+    </p>
 
-                <p className="max-w-52 truncate text-sm text-gray-500">
-                  {userEmail || "Boss Account"}
-                </p>
+    {!profileLoading && (
+      <button
+        type="button"
+        onClick={openProfileModal}
+        className="text-sm text-blue-600 transition hover:text-blue-800"
+        title="Edit Name"
+        aria-label="Edit profile"
+      >
+        ✏️
+      </button>
+    )}
+  </div>
 
-                <p className="text-xs font-semibold capitalize text-blue-700">
-                  {userRole}
-                </p>
-              </div>
+  <p className="text-xs font-semibold capitalize text-blue-700">
+    {userRole}
+  </p>
+</div>
             </div>
 
             <button
@@ -522,7 +639,7 @@ setEditForm({
             >
               {loggingOut ? "Logging out..." : "Logout"}
             </button>
-          </div>
+          </div>  
         </div>
       </div>
 

@@ -21,7 +21,7 @@ export default function LoginPage() {
     const cleanEmployeeId = employeeId.trim().toLowerCase();
 
     if (!cleanEmployeeId || !password.trim()) {
-      setMessage("Login ID અને Password નાખો.");
+      setMessage("Please enter your Login ID and password.");
       return;
     }
 
@@ -38,12 +38,12 @@ export default function LoginPage() {
       });
 
       if (error) {
-        setMessage("Login ID અથવા Password ખોટો છે.");
+        setMessage("The Login ID or password is incorrect.");
         return;
       }
 
       if (!data.user) {
-        setMessage("Login થઈ શક્યું નથી. ફરી પ્રયાસ કરો.");
+        setMessage("Unable to sign in. Please try again.");
         return;
       }
 
@@ -57,14 +57,14 @@ export default function LoginPage() {
         router.replace("/employee");
       } else {
         await supabase.auth.signOut();
-        setMessage("આ Login ID ને CRM access નથી.");
+        setMessage("This Login ID is not authorized to access the CRM.");
         return;
       }
 
       router.refresh();
     } catch (error) {
       console.error("Login error:", error);
-      setMessage("Login દરમિયાન સમસ્યા આવી. ફરી પ્રયાસ કરો.");
+      setMessage("Something went wrong while signing in. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,7 @@ export default function LoginPage() {
 
       <div className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl items-center justify-center">
         <div className="grid w-full overflow-hidden rounded-3xl border border-white/15 bg-white shadow-2xl lg:grid-cols-2">
-          <section className="hidden bg-gradient-to-br from-blue-700 to-cyan-500 p-12 text-white lg:flex lg:flex-col lg:justify-between">
+          <section className="hidden bg-gradient-to-br from-blue-700 to-cyan-500 p-12 text-white lg:flex lg:flex-col">
             <div>
               <div className="flex items-center gap-4">
                 <img
@@ -103,34 +103,22 @@ export default function LoginPage() {
                 </p>
 
                 <h2 className="mt-5 text-5xl font-extrabold leading-tight">
-                  Manage Leads,
+                  Complete Insurance
                   <br />
-                  Calls and
-                  <br />
-                  Employees.
+                  CRM Solution
                 </h2>
 
                 <p className="mt-7 max-w-md text-lg leading-8 text-blue-100">
-                  Boss અને Employee માટે સુરક્ષિત CRM, Lead Assignment,
-                  Calling Response, Follow-up અને Performance Tracking સાથે.
+                  Manage leads, policies, renewals, follow-ups, calls and
+                  employee performance from one secure dashboard.
                 </p>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-3 gap-3 text-center">
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-                <p className="text-2xl font-bold">1</p>
-                <p className="mt-1 text-sm text-blue-100">Boss</p>
-              </div>
-
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-                <p className="text-2xl font-bold">3</p>
-                <p className="mt-1 text-sm text-blue-100">Employees</p>
-              </div>
-
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-                <p className="text-2xl font-bold">24×7</p>
-                <p className="mt-1 text-sm text-blue-100">CRM Access</p>
+                <div className="mt-8 space-y-3 text-blue-50">
+                  <p>✓ Lead and customer management</p>
+                  <p>✓ Policy and renewal tracking</p>
+                  <p>✓ Follow-up scheduling</p>
+                  <p>✓ Employee performance monitoring</p>
+                </div>
               </div>
             </div>
           </section>
@@ -149,11 +137,12 @@ export default function LoginPage() {
                 </p>
 
                 <h2 className="mt-3 text-4xl font-extrabold text-slate-950">
-                  CRM Login
+                  Sign in to your CRM
                 </h2>
 
                 <p className="mt-3 text-slate-500">
-                  Boss અથવા Employee ID અને Password નાખો.
+                  Enter your administrator or employee credentials to access
+                  the dashboard.
                 </p>
               </div>
 
@@ -171,7 +160,7 @@ export default function LoginPage() {
                     type="text"
                     value={employeeId}
                     onChange={(event) => setEmployeeId(event.target.value)}
-                    placeholder="admin અથવા emp001"
+                    placeholder="Enter admin or employee ID"
                     autoComplete="username"
                     disabled={loading}
                     className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 text-slate-950 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
@@ -192,7 +181,7 @@ export default function LoginPage() {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
-                      placeholder="તમારો Password"
+                      placeholder="Enter your password"
                       autoComplete="current-password"
                       disabled={loading}
                       className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-4 pr-20 text-slate-950 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
@@ -220,12 +209,13 @@ export default function LoginPage() {
                   disabled={loading}
                   className="w-full rounded-2xl bg-blue-700 px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {loading ? "Logging in..." : "Login to CRM"}
+                  {loading ? "Signing in..." : "Sign In"}
                 </button>
               </form>
 
               <div className="mt-8 rounded-2xl bg-slate-100 p-4 text-center text-sm text-slate-600">
-                CRM માત્ર Boss અને Authorized Employees માટે છે.
+                Authorized access only. This CRM is exclusively for Shiv
+                Consultancy administrators and employees.
               </div>
 
               <button
@@ -233,8 +223,12 @@ export default function LoginPage() {
                 onClick={() => router.push("/")}
                 className="mt-5 w-full text-center text-sm font-bold text-blue-700 hover:underline"
               >
-                ← Public Website પર પાછા જાઓ
+                ← Return to Public Website
               </button>
+
+              <p className="mt-6 text-center text-xs text-slate-400">
+                © 2026 Shiv Consultancy. All Rights Reserved.
+              </p>
             </div>
           </section>
         </div>
