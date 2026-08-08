@@ -167,14 +167,14 @@ export default function Contact() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
             <a
-              href="tel:8511632556"
+              href="tel:8320352558"
               className="rounded-lg bg-green-600 py-3 text-center font-bold text-white transition hover:bg-green-700"
             >
               📞 Call Now
             </a>
 
             <a
-              href="https://wa.me/918511632556"
+              href="https://wa.me/918320352558"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg bg-green-500 py-3 text-center font-bold text-white transition hover:bg-green-600"
@@ -209,10 +209,10 @@ export default function Contact() {
             <p>
               📞{" "}
               <a
-                href="tel:8511632556"
+                href="tel:8320352558"
                 className="font-semibold hover:text-cyan-300"
               >
-                8511632556
+                8320352558
               </a>
             </p>
 

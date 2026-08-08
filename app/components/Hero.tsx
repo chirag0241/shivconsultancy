@@ -73,7 +73,7 @@ export default function Hero() {
 
               {/* Call */}
               <a
-                href="tel:8511632556"
+                href="tel:8320352558"
                 className="rounded-2xl bg-green-600 px-8 py-4 font-bold text-white shadow-xl transition hover:scale-105 hover:bg-green-700"
               >
                 📞 Call Now
@@ -81,7 +81,7 @@ export default function Hero() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/918511632556"
+                href="https://wa.me/918320352558"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-2xl bg-emerald-500 px-8 py-4 font-bold text-white shadow-xl transition hover:scale-105 hover:bg-emerald-600"

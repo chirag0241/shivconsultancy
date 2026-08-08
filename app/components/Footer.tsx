@@ -121,10 +121,10 @@ export default function Footer() {
               <p>
                 📞{" "}
                 <a
-                  href="tel:8511632556"
+                  href="tel:8320352558"
                   className="transition hover:text-white"
                 >
-                  +91 8511632556
+                  +91 8320352558
                 </a>
               </p>
 
@@ -151,14 +151,14 @@ export default function Footer() {
             <div className="mt-6 flex flex-wrap gap-4">
 
               <a
-                href="tel:8511632556"
+                href="tel:8320352558"
                 className="rounded-xl bg-blue-600 px-5 py-3 font-semibold transition hover:bg-blue-700"
               >
                 📞 Call
               </a>
 
               <a
-                href="https://wa.me/918511632556"
+                href="https://wa.me/918320352558"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-xl bg-green-600 px-5 py-3 font-semibold transition hover:bg-green-700"
