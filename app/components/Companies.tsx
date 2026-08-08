@@ -6,6 +6,7 @@ const companies = [
   "Reliance General",
   "SBI General",
   "Go Digit",
+  "10 + Compines"
 ];
 
 export default function Companies() {
